@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CLAS" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <VSEOCLASS>
+    <CLSNAME>ZCL_ROOM_TYPE</CLSNAME>
+    <LANGU>E</LANGU>
+    <DESCRIPT>Room Type Class</DESCRIPT>
+    <STATE>1</STATE>
+    <CLSCCINCL>X</CLSCCINCL>
+    <FIXPT>X</FIXPT>
+    <UNICODE>X</UNICODE>
+   </VSEOCLASS>
+   <DESCRIPTIONS>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_ROOM_TYPE</CLSNAME>
+     <CMPNAME>CONSTRUCTOR</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>CONSTRUCTOR</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_ROOM_TYPE</CLSNAME>
+     <CMPNAME>DESCRIPTION</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>128 Lowercase and Uppercase Letters</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_ROOM_TYPE</CLSNAME>
+     <CMPNAME>MAX_CAPACITY</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Whole Number with +/- Sign (-2.147.483.648 .. 2.147.483.647)</DESCRIPT>
+    </SEOCOMPOTX>
+   </DESCRIPTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

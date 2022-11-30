@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CLAS" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <VSEOCLASS>
+    <CLSNAME>ZCL_ROOM</CLSNAME>
+    <LANGU>E</LANGU>
+    <DESCRIPT>Room Class</DESCRIPT>
+    <STATE>1</STATE>
+    <CLSCCINCL>X</CLSCCINCL>
+    <FIXPT>X</FIXPT>
+    <UNICODE>X</UNICODE>
+   </VSEOCLASS>
+   <DESCRIPTIONS>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_ROOM</CLSNAME>
+     <CMPNAME>CONSTRUCTOR</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>CONSTRUCTOR</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_ROOM</CLSNAME>
+     <CMPNAME>NAME</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>128 Lowercase and Uppercase Letters</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_ROOM</CLSNAME>
+     <CMPNAME>NUMBER</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>128 Lowercase and Uppercase Letters</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_ROOM</CLSNAME>
+     <CMPNAME>ROOM_TYPE_ID</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Whole Number with +/- Sign (-2.147.483.648 .. 2.147.483.647)</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_ROOM</CLSNAME>
+     <CMPNAME>SMOKE</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Boolean Variable (X=true, -=false, space=unknown)</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_ROOM</CLSNAME>
+     <CMPNAME>STATUS</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>128 Lowercase and Uppercase Letters</DESCRIPT>
+    </SEOCOMPOTX>
+   </DESCRIPTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>
