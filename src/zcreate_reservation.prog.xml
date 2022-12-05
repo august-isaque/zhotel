@@ -13,13 +13,67 @@
     <item>
      <ID>I</ID>
      <KEY>001</KEY>
-     <ENTRY>Create Reservation</ENTRY>
+     <ENTRY>Create Guest</ENTRY>
      <LENGTH>28</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>002</KEY>
+     <ENTRY>Dates</ENTRY>
+     <LENGTH>15</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>003</KEY>
+     <ENTRY>Select Room</ENTRY>
+     <LENGTH>22</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>004</KEY>
+     <ENTRY>Room not found</ENTRY>
+     <LENGTH>28</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>005</KEY>
+     <ENTRY>Reservation done.</ENTRY>
+     <LENGTH>27</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>006</KEY>
+     <ENTRY>Check the checkin and checkout dates.</ENTRY>
+     <LENGTH>74</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>007</KEY>
+     <ENTRY>Disponivel</ENTRY>
+     <LENGTH>20</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>008</KEY>
+     <ENTRY>Room not available</ENTRY>
+     <LENGTH>28</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>009</KEY>
+     <ENTRY>Indísponivel</ENTRY>
+     <LENGTH>22</LENGTH>
     </item>
     <item>
      <ID>R</ID>
      <ENTRY>Program ZCREATE_RESERVATION</ENTRY>
      <LENGTH>27</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_BDATE</KEY>
+     <ENTRY>Birth date:</ENTRY>
+     <LENGTH>19</LENGTH>
     </item>
     <item>
      <ID>S</ID>
@@ -35,15 +89,27 @@
     </item>
     <item>
      <ID>S</ID>
-     <KEY>P_G_ID</KEY>
-     <ENTRY>Guest:</ENTRY>
-     <LENGTH>14</LENGTH>
+     <KEY>P_FNAME</KEY>
+     <ENTRY>First name:</ENTRY>
+     <LENGTH>19</LENGTH>
     </item>
     <item>
      <ID>S</ID>
-     <KEY>P_MD_BY</KEY>
-     <ENTRY>Made By:</ENTRY>
-     <LENGTH>16</LENGTH>
+     <KEY>P_LNAME</KEY>
+     <ENTRY>Last name:</ENTRY>
+     <LENGTH>18</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_MSINCE</KEY>
+     <ENTRY>Member since:</ENTRY>
+     <LENGTH>21</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_ROOM</KEY>
+     <ENTRY>Room:</ENTRY>
+     <LENGTH>13</LENGTH>
     </item>
    </TPOOL>
   </asx:values>

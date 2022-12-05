@@ -17,6 +17,12 @@
      <LENGTH>28</LENGTH>
     </item>
     <item>
+     <ID>I</ID>
+     <KEY>002</KEY>
+     <ENTRY>Guest created</ENTRY>
+     <LENGTH>23</LENGTH>
+    </item>
+    <item>
      <ID>R</ID>
      <ENTRY>Create Guest - Standalone Report</ENTRY>
      <LENGTH>32</LENGTH>

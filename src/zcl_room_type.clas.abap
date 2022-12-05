@@ -85,13 +85,13 @@ CLASS ZCL_ROOM_TYPE IMPLEMENTATION.
 
 
   method get_next_id.
-    data: i type integer.
 
-    select max( id ) from zroom_type into i.
+
+    select max( id ) from zroom_type into @data(lv_id).
     if sy-subrc <> 0.
       return = '00001'.
     else.
-      return = i + 1.
+      return = lv_id + 1.
     endif.
 
 

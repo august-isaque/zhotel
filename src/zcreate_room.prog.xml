@@ -11,6 +11,18 @@
    </PROGDIR>
    <TPOOL>
     <item>
+     <ID>I</ID>
+     <KEY>002</KEY>
+     <ENTRY>Room type not found.</ENTRY>
+     <LENGTH>40</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>003</KEY>
+     <ENTRY>Room saved.</ENTRY>
+     <LENGTH>21</LENGTH>
+    </item>
+    <item>
      <ID>R</ID>
      <ENTRY>Program ZCREATE_ROOM</ENTRY>
      <LENGTH>20</LENGTH>

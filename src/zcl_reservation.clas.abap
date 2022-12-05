@@ -4,6 +4,9 @@ class zcl_reservation definition
   create public .
 
   public section.
+    class-methods:
+      check_date importing iv_checkin type datum iv_checkout type datum
+             returning value(return) type boolean.
 
     methods:
       constructor importing iv_date_in  type datum
@@ -19,26 +22,35 @@ class zcl_reservation definition
       set_guest_id importing iv_guest_id type ref to zcl_guest,
       get_guest_id returning value(return) type ref to zcl_guest,
       get_next_id returning value(return) type integer,
-      save importing io_reservation type ref to zcl_reservation.
-
-
-
-
-
+      save importing io_reservation type ref to zcl_reservation,
+      set_id importing iv_id type i,
+      get_id returning value(return) type i,
+      get_last_id returning value(return) type i.
 
 
   protected section.
+
   private section.
 
     data date_in type datum .
     data date_out type datum .
     data made_by type syuname .
     data guest_id type ref to zcl_guest.
+    data id type i.
 ENDCLASS.
 
 
 
 CLASS ZCL_RESERVATION IMPLEMENTATION.
+
+
+  method check_date.
+    if iv_checkin gt iv_checkout.
+      return = abap_false.
+    else.
+      return = abap_true.
+    endif.
+  endmethod.
 
 
   method constructor.
@@ -62,6 +74,17 @@ CLASS ZCL_RESERVATION IMPLEMENTATION.
 
   method get_guest_id.
     return = me->guest_id.
+  endmethod.
+
+
+  method get_id.
+    return = me->id.
+  endmethod.
+
+
+  method get_last_id.
+    select max( id ) from zreservation into @data(i).
+    return = i.
   endmethod.
 
 
@@ -110,6 +133,11 @@ CLASS ZCL_RESERVATION IMPLEMENTATION.
 
   method set_guest_id.
     me->guest_id = iv_guest_id.
+  endmethod.
+
+
+  method set_id.
+    me->id = iv_id.
   endmethod.
 
 

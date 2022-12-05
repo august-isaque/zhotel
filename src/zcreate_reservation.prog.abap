@@ -6,36 +6,92 @@
 report zcreate_reservation.
 
 
-selection-screen begin of block b1 with frame title text-001.
-parameters: p_d_in  type datum,
-            p_d_ou  type datum,
-            p_g_id  type integer matchcode object zguest_id.
-selection-screen end of block b1.
-
-data: lo_reservation    type ref to zcl_reservation,
-      lo_reserved_room  type ref to zcl_reserved_room,
-      lo_occ_room       type ref to zcl_occupied_room,
-      lo_hosted_at      type ref to zcl_hosted_at,
-      lo_guest          type ref to zcl_guest.
+INCLUDE ZCREATE_RESERVATION_TOP.
+INCLUDE ZCREATE_RESERVATION_SEL.
 
 
+initialization.
+
+at selection-screen output.
+  perform f_clean_fields.
+
+at selection-screen.
+  perform f_create_guest.
+  perform f_create_reservation.
+  perform f_get_room.
+  perform f_occupy_room.
 
 
+form f_create_guest.
+  go_guest = new #(
+      iv_member_since = p_msince
+      iv_first_name   = p_fname
+      iv_last_name    = p_lname
+      iv_birth_date   = p_bdate
+  ).
+  go_guest->save(  go_guest ).
+  go_guest->set_id( go_guest->get_last_id( ) ).
+endform.
 
-call method zcl_guest=>get_guest_by_id
-  exporting
-    iv_id  = p_g_id
-  receiving
-    return = lo_guest.
+form f_create_reservation.
+  data(check_date) = zcl_reservation=>check_date( iv_checkin  = p_d_in
+                                                  iv_checkout = p_d_ou ).
 
+  if check_date eq abap_true.
+    go_reservation = new #(
+          iv_date_in  = p_d_in
+          iv_date_out = p_d_ou
+          iv_made_by  = sy-uname
+          iv_guest_id = go_guest
+      ).
+    go_reservation->save( go_reservation ).
+    go_reservation->set_id( go_reservation->get_last_id( )  ).
+  else.
+    message e208(00) with text-006 .
+  endif.
+endform.
 
+form f_get_room.
+  go_room = zcl_room=>get_room_by_id( p_room ).
 
+  if go_room is initial.
+    message e208(00) with text-004 .
+  endif.
+  if go_room->get_status( ) ne text-007.
+    message e208(00) with text-008 .
+  endif.
 
-create object lo_reservation
-  exporting
-    iv_date_in  = p_d_in
-    iv_date_out = p_d_ou
-    iv_made_by  = sy-uname
-    iv_guest_id = lo_guest.
+endform.
 
-lo_reservation->save( lo_reservation ).
+form f_occupy_room.
+  go_occ_room = new #(
+      iv_check_in       = go_reservation->get_date_in( )
+      iv_check_out      = go_reservation->get_date_out( )
+      iv_room_id        = go_room
+      iv_reservation_id = go_reservation
+  ).
+
+  go_occ_room->save( go_occ_room  ).
+  go_occ_room->set_id( go_occ_room->get_last_id( ) ).
+
+  go_hosted_at = new #(
+      iv_guest_id         = go_guest
+      iv_occupied_room_id = go_occ_room
+  ).
+  go_hosted_at->save( go_hosted_at ).
+  go_room->set_status( text-009 ).
+  go_room->update_room( go_room ).
+  message text-005 type 'S'  .
+endform.
+
+form f_clean_fields.
+  clear p_fname.
+  clear p_lname.
+  clear p_bdate.
+  clear p_msince.
+  clear p_d_in.
+  clear p_d_ou.
+  clear p_room.
+  modify screen.
+
+endform.
