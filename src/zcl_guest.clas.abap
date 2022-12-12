@@ -5,11 +5,29 @@ class zcl_guest definition inheriting from zcl_person
   create public .
 
   public section.
+    types: begin of ty_guests,
+             id      type zguest-id,
+             m_since type zguest-member_since,
+             f_name  type zperson-first_name,
+             l_name  type zperson-last_name,
+             d_date  type zperson-birth_date,
+           end of ty_guests.
+
+    types: tt_guests type table of ty_guests with key id.
+
     class-methods:
-      get_guest_by_id importing
-                                iv_id         type integer
-                      returning value(return) type ref to zcl_guest.
-    types tt_guests type standard table of ref to zcl_guest with default key.
+      get_guest_by_id
+        importing
+          iv_id
+            type integer
+        returning
+          value(return)
+            type ref to zcl_guest,
+      get_guest_list
+        returning
+          value(return)
+            type tt_guests.
+
 
     methods:
       save redefinition,
@@ -21,12 +39,18 @@ class zcl_guest definition inheriting from zcl_person
           iv_last_name    type string128
           iv_birth_date   type datum
           iv_id           type integer optional,
-      set_member_since importing
-                         iv_member_since type datum,
-      get_member_since returning
-                         value(return) type datum,
-      set_id importing iv_id type integer,
-      get_id returning value(return) type integer.
+      set_member_since
+        importing
+          iv_member_since type datum,
+      get_member_since
+        returning
+          value(return) type datum,
+      set_id
+        importing
+          iv_id type integer,
+      get_id
+        returning
+          value(return) type integer.
 
 
 
@@ -54,12 +78,13 @@ CLASS ZCL_GUEST IMPLEMENTATION.
 
 
   method get_guest_by_id.
+
     select zguest~id, zguest~member_since, zperson~first_name, zperson~last_name, zperson~birth_date
-      from zguest
-      inner join zperson
-        on zguest~id = zperson~id
-      into table @data(lt_guest)
-      where zguest~id = @iv_id.
+    from zguest
+    inner join zperson
+      on zguest~id = zperson~id
+    into table @data(lt_guest)
+    where zguest~id = @iv_id.
 
     data: ls_guest like line of lt_guest.
 
@@ -76,6 +101,28 @@ CLASS ZCL_GUEST IMPLEMENTATION.
           iv_id           = ls_guest-id.
       return = lo_guest.
     endif.
+
+  endmethod.
+
+
+  method get_guest_list.
+
+    data: ls_guests type line of  tt_guests,
+          lt_guests type table of ty_guests.
+
+    select zguest~id, zguest~member_since, zperson~first_name, zperson~last_name, zperson~birth_date
+      from zguest
+      inner join zperson
+        on zguest~id = zperson~id
+      into (@ls_guests-id,
+            @ls_guests-m_since,
+            @ls_guests-f_name,
+            @ls_guests-l_name,
+            @ls_guests-d_date).
+      append ls_guests to lt_guests .
+    endselect.
+
+    return = lt_guests.
 
   endmethod.
 

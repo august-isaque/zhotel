@@ -2,11 +2,22 @@ class zcl_reservation definition
   public
   final
   create public .
-
   public section.
+    types: begin of ty_reservation,
+             id        type zguest-id,
+             f_name    type zperson-first_name,
+             l_name    type zperson-last_name,
+             check_in  type zreservation-date_in,
+             check_out type zreservation-date_out,
+             r_number  type zroom-room_number,
+           end of ty_reservation.
+
+    types: tt_reservation type table of ty_reservation with default key.
+
     class-methods:
       check_date importing iv_checkin type datum iv_checkout type datum
-             returning value(return) type boolean.
+             returning value(return) type boolean,
+      get_reservation_list returning value(return) type tt_reservation.
 
     methods:
       constructor importing iv_date_in  type datum
@@ -94,15 +105,47 @@ CLASS ZCL_RESERVATION IMPLEMENTATION.
 
 
   method get_next_id.
-
     select max( id ) from zreservation into @data(i).
     if sy-subrc <> 0.
       return = '00001'.
     else.
       return = i + 1.
     endif.
+  endmethod.
 
 
+  method get_reservation_list.
+    data: ls_reservation type line of  tt_reservation,
+          lt_reservation type table of ty_reservation.
+
+    select
+      zguest~id,
+      zperson~first_name,
+      zperson~last_name,
+      zreservation~date_in,
+      zreservation~date_out,
+      zroom~room_number
+    from zoccupied_room
+    inner join zroom
+      on zoccupied_room~room_id = zroom~id
+    inner join zreservation
+      on zoccupied_room~reservation_id = zreservation~id
+    inner join zguest
+      on zreservation~guest_id = zguest~id
+    inner join zperson
+      on zguest~id = zperson~id
+    into
+     (@ls_reservation-id,
+      @ls_reservation-f_name,
+      @ls_reservation-l_name,
+      @ls_reservation-check_in,
+      @ls_reservation-check_out,
+      @ls_reservation-r_number
+      ).
+      append ls_reservation to lt_reservation.
+    endselect.
+
+    RETURN = lt_reservation.
   endmethod.
 
 
